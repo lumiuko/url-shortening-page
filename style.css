@@ -1,0 +1,61 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.cards {
+  position: relative;
+}
+
+.cards::before {
+  content: '';
+  position: absolute;
+  width: 8px;
+  height: 100%;
+  background-color: #2bd0d0;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%) translateY(0);
+  z-index: -1;
+}
+
+.menu-hidden {
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(10px);
+}
+
+.form-error input {
+  outline: 3px solid #f46363;
+  color: #f46363;
+}
+
+.form-error input::placeholder {
+  color: #f46363;
+}
+
+.form-error .error-text {
+  display: block;
+}
+
+button.highlight,
+button.highlight:hover {
+  background-color: #3a3054;
+}
+
+footer a {
+  transition: color 0.2s;
+}
+
+footer a:hover {
+  color: #2bd0d0;
+}
+
+@media (min-width: 1110px) {
+  .cards::before {
+    left: 0;
+    top: 58%;
+    height: 8px;
+    width: 100%;
+    transform: translateX(0) translateY(-50%);
+  }
+}

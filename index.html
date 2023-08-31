@@ -1,0 +1,152 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="description" content="Frontend Mentor Challenge - Shortly">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,500;0,700;1,500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <title>Frontend Mentor | Shortly</title>
+    <script src="https://kit.fontawesome.com/56471ca088.js" crossorigin="anonymous" defer></script>
+  </head>
+  <body class="bg-light-gray text-gray font-medium">
+    <header class="bg-white overflow-hidden px-6 pt-10 pb-[10.5rem] xl:pt-12 xl:pb-[9.5rem]">
+      <div class="max-w-container mx-auto">
+        <nav class="flex items-center relative font-bold">
+          <img src="/logo.svg" class="w-[120px]" alt="Logo" />
+          <!-- Mobile nav -->
+          <div class="absolute top-0 left-0 mt-14 px-6 py-10 bg-very-dark-purple w-full rounded-md text-center text-white text-lg leading-[1.6875rem] transition-all xl:hidden menu-hidden" id="mobile-nav">
+            <ul class="flex flex-col gap-[1.875rem] pb-[1.875rem] border-b-[1px] border-b-nav-line">
+              <li><a href="#">Features</a></li>
+              <li><a href="#">Pricing</a></li>
+              <li><a href="#">Resources</a></li>
+            </ul>
+            <div class="mt-8 flex flex-col gap-6">
+              <a href="#">Login</a>
+              <a href="#" class="bg-cyan py-[0.625rem] rounded-xl leading-[1.75rem]">Sign Up</a>
+            </div>
+          </div>
+          <!-- Desktop nav -->
+          <div class="hidden flex-grow xl:flex items-center text-sm leading-sm ml-11">
+            <ul class="flex items-center gap-[1.875rem]">
+              <li><a href="#" class="hover:text-dark transition-colors">Features</a></li>
+              <li><a href="#" class="hover:text-dark transition-colors">Pricing</a></li>
+              <li><a href="#" class="hover:text-dark transition-colors">Resources</a></li>
+            </ul>
+            <a href="#" class="ml-auto hover:text-dark transition-colors">Login</a>
+            <a href="#" class="ml-9 inline-block px-6 py-2 bg-cyan text-white rounded-xl leading-[1.5rem] hover:bg-cyan-hover transition-colors">Sign Up</a>
+          </div>
+          <button aria-label="Toggle menu" aria-expanded="false" class="ml-auto xl:hidden" id="menu-btn">
+            <img src="/hamburger-menu-icon.svg" alt="Hamburger-menu" aria-hidden="true" />
+          </button>
+        </nav>
+        <div class="flex flex-col mt-6 xl:flex-row xl:items-center xl:mt-[4.875rem]">
+          <img class="mx-auto min-w-[511px] xl:order-1 xl:min-w-[733px] xl:ml-[6.375rem]" src="/illustration-working.svg" alt="Illustration working" />
+          <div class="mt-9 text-center max-w-[564px] mx-auto xl:mt-0 xl:text-left xl:flex-shrink-0">
+            <h1 class="text-h2 leading-h2 tracking-[-1px] font-bold text-dark xl:text-h1 xl:leading-h1 xl:tracking-[-2px]">More than just shorter links</h1>
+            <p class="mt-4 text-lg leading-lg xl:text-h5 xl:leading-[2.25rem] xl:mt-[0.3125rem]">Build your brand’s recognition and get detailed insights on how your links are performing.</p>
+            <a href="#" class="inline-block mt-8 bg-cyan text-h6 leading-h6 text-white font-bold px-10 py-[0.8125rem] rounded-xl xl:mt-[2.375rem] hover:bg-cyan-hover transition-colors">Get Started</a>
+          </div>
+        </div>
+      </div>
+    </header>
+    <main>
+      <section class="-mt-20 px-6 xl:mt-[-5.25rem]">
+        <div class="max-w-container mx-auto">
+          <h2 class="sr-only">Shorten your link now</h2>
+          <form class="p-6 bg-very-dark-purple rounded-md bg-shorten-mobile bg-no-repeat bg-cover xl:px-16 xl:py-[3.25rem] xl:bg-shorten-desktop xl:bg-left-bottom" id="form" autocomplete="off">
+            <div class="flex flex-col gap-4 xl:flex-row xl:gap-6">
+              <input type="text" id="input" name="url" placeholder="Shorten a link here..." class="bg-white text-dark rounded-sm leading-[2.25rem] py-[0.375rem] px-4 placeholder:text-dark placeholder:opacity-50 flex-grow xl:rounded-md xl:text-h6 xl:px-8 xl:py-[0.875rem]" />
+              <button class="bg-cyan font-bold text-white text-lg leading-[1.75rem] px-10 py-[0.625rem] rounded-sm xl:text-h6 xl:leading-h6 xl:py-[1.0625rem] xl:rounded-md hover:bg-cyan-hover transition-colors" id="shorten-btn">Shorten It!</button>
+            </div>
+            <p class="text-red mt-2 italic hidden error-text" id="error-text"></p>
+          </form>
+          <ul id="links" class="mt-6 flex flex-col gap-6 text-dark leading-[2.25rem] xl:text-h6 xl:leading-[2.25rem]"></ul>
+        </div>
+      </section>
+      <section class="mt-20 px-6 xl:mt-24">
+        <div class="max-w-container mx-auto">
+          <div class="max-w-[540px] mx-auto text-center">
+            <h2 class="text-h4 leading-h4 tracking-[-0.7px] font-bold text-dark xl:text-h3 xl:leading-h3">Advanced Statistics</h2>
+            <p class="mt-4 leading-[1.75rem] xl:text-lg xl:leading-[2rem] xl:mt-[1.125rem]">Track how your links are performing across the web with our advanced statistics dashboard.</p>
+          </div>
+          <div class="cards mt-[5.75rem] flex flex-col gap-[5.75rem] text-sm leading-[1.625rem] xl:mt-[6.25rem] xl:flex-row xl:gap-[1.875rem]">
+            <div class="bg-white px-8 pb-10 flex flex-col items-center text-center rounded-sm xl:items-start xl:text-left">
+              <div class="-mt-11 rounded-full bg-very-dark-purple w-[88px] h-[88px] flex justify-center items-center">
+                <img src="/icon-brand-recognition.svg" class="w-[40px]" alt="Brand Recognition" />
+              </div>
+              <h3 class="mt-8 text-dark font-bold text-h5 leading-h5">Brand Recognition</h3>
+              <p class="mt-3">Boost your brand recognition with each click. Generic links don’t mean a thing. Branded links help instil confidence in your content.</p>
+            </div>
+            <div class="bg-white px-8 pb-10 flex flex-col items-center text-center rounded-sm xl:items-start xl:text-left xl:translate-y-11">
+              <div class="-mt-11 rounded-full bg-very-dark-purple w-[88px] h-[88px] flex justify-center items-center">
+                <img src="/icon-detailed-records.svg" class="w-[40px]" alt="Detailed Records" />
+              </div>
+              <h3 class="mt-8 text-dark font-bold text-h5 leading-h5">Detailed Records</h3>
+              <p class="mt-3">Gain insights into who is clicking your links. Knowing when and where people engage with your content helps inform better decisions.</p>
+            </div>
+            <div class="bg-white px-8 pb-10 flex flex-col items-center text-center rounded-sm xl:items-start xl:text-left xl:translate-y-[5.5rem]">
+              <div class="-mt-11 rounded-full bg-very-dark-purple w-[88px] h-[88px] flex justify-center items-center">
+                <img src="/icon-fully-customizable.svg" class="w-[40px]" alt="Fully Customizable" />
+              </div>
+              <h3 class="mt-8 text-dark font-bold text-h5 leading-h5">Fully Customizable</h3>
+              <p class="mt-3">Improve brand awareness and content discoverability through customizable links, supercharging audience engagement.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section class="mt-20 bg-very-dark-purple px-4 py-[5.625rem] text-center text-white bg-bg-boost-mobile bg-no-repeat bg-cover xl:mt-52 xl:py-14 xl:bg-bg-boost-desktop xl:bg-center">
+        <h2 class="text-h4 leading-h4 font-bold tracking-[-1] xl:text-h3 xl:leading-h3">Boost your links today</h2>
+        <a href="#" class="inline-block mt-4 bg-cyan px-10 py-[0.8125rem] rounded-xl font-bold text-h6 leading-h6 xl:mt-8 hover:bg-cyan-hover transition-colors">Get Started</a>
+      </section>
+    </main>
+    <footer class="bg-footer px-6 py-14 text-sm leading-sm text-dark-gray">
+      <div class="max-w-container mx-auto flex flex-col items-center text-center xl:flex-row xl:items-start xl:text-left">
+        <img src="/logo-white.svg" class="w-[120px]" alt="Logo" />
+        <div class="mt-12 xl:mt-0 xl:ml-auto">
+          <h2 class="text-md leading-md font-bold text-white">Features</h2>
+          <ul class="mt-[1.375rem] flex flex-col gap-[0.625rem]">
+            <li><a href="#">Link Shortening</a></li>
+            <li><a href="#">Branded Links</a></li>
+            <li><a href="#">Analytics</a></li>
+          </ul>
+        </div>
+        <div class="mt-10 xl:mt-0 xl:ml-[4.875rem]">
+          <h2 class="text-md leading-md font-bold text-white">Resources</h2>
+          <ul class="mt-[1.375rem] flex flex-col gap-[0.625rem]">
+            <li><a href="#">Blog</a></li>
+            <li><a href="#">Developers</a></li>
+            <li><a href="#">Support</a></li>
+          </ul>
+        </div>
+        <div class="mt-10 xl:mt-0 xl:ml-[6.75rem]">
+          <h2 class="text-md leading-md font-bold text-white">Company</h2>
+          <ul class="mt-[1.375rem] flex flex-col gap-[0.625rem]">
+            <li><a href="#">About</a></li>
+            <li><a href="#">Our Team</a></li>
+            <li><a href="#">Careers</a></li>
+            <li><a href="#">Contact</a></li>
+          </ul>
+        </div>
+        <div class="mt-12 flex gap-6 text-white text-[1.5rem] xl:mt-0 xl:ml-[6.25rem]">
+          <a href="#" aria-label="Facebook">
+            <i class="fa-brands fa-square-facebook"></i>
+          </a>
+          <a href="#" aria-label="Twitter">
+            <i class="fa-brands fa-twitter"></i>
+          </a>
+          <a href="#" aria-label="Pinterest">
+            <i class="fa-brands fa-pinterest"></i>
+          </a>
+          <a href="#" aria-label="Instagram">
+            <i class="fa-brands fa-instagram"></i>
+          </a>
+        </div>
+      </div>
+    </footer>
+    <script type="module" src="/main.js"></script>
+  </body>
+</html>
