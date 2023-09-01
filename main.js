@@ -18,6 +18,7 @@ function toggleClass(element, className, condition) {
 function handleMenuBtnClick() {
   isMenuOpen = !isMenuOpen
   toggleClass(mobileNav, 'menu-hidden', !isMenuOpen)
+  menuBtn.ariaExpanded = isMenuOpen
 }
 
 async function getShortenedURL(url) {

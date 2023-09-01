@@ -17,6 +17,10 @@
       <div class="max-w-container mx-auto">
         <nav class="flex items-center relative font-bold">
           <img src="/logo.svg" class="w-[120px]" alt="Logo" />
+          <!-- Mobile nav button -->
+          <button aria-label="Toggle menu" aria-expanded="false" class="ml-auto xl:hidden" id="menu-btn">
+            <img src="/hamburger-menu-icon.svg" alt="Hamburger-menu" aria-hidden="true" />
+          </button>
           <!-- Mobile nav -->
           <div class="absolute top-0 left-0 mt-14 px-6 py-10 bg-very-dark-purple w-full rounded-md text-center text-white text-lg leading-[1.6875rem] transition-all xl:hidden menu-hidden" id="mobile-nav">
             <ul class="flex flex-col gap-[1.875rem] pb-[1.875rem] border-b-[1px] border-b-nav-line">
@@ -39,9 +43,6 @@
             <a href="#" class="ml-auto hover:text-dark transition-colors">Login</a>
             <a href="#" class="ml-9 inline-block px-6 py-2 bg-cyan text-white rounded-xl leading-[1.5rem] hover:bg-cyan-hover transition-colors">Sign Up</a>
           </div>
-          <button aria-label="Toggle menu" aria-expanded="false" class="ml-auto xl:hidden" id="menu-btn">
-            <img src="/hamburger-menu-icon.svg" alt="Hamburger-menu" aria-hidden="true" />
-          </button>
         </nav>
         <div class="flex flex-col mt-6 xl:flex-row xl:items-center xl:mt-[4.875rem]">
           <img class="mx-auto min-w-[511px] xl:order-1 xl:min-w-[733px] xl:ml-[6.375rem]" src="/illustration-working.svg" alt="Illustration working" />
