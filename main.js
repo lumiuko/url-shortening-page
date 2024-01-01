@@ -22,17 +22,22 @@ function handleMenuBtnClick() {
 }
 
 async function getShortenedURL(url) {
-  const res = await fetch('https://cleanuri.com/api/v1/shorten', {
+  const res = await fetch('https://api-ssl.bitly.com/v4/shorten', {
     method: 'post',
-    body: JSON.stringify({ url })
+    body: JSON.stringify({ long_url: url }),
+    headers: {
+      Authorization: 'Bearer dfc762f00b8c4f87bfccad699eec8a4509d4e908',
+      'Content-Type': 'application/json'
+    }
   })
+
   const data = await res.json()
 
-  if (!res.ok && data?.error) {
-    throw new Error(data.error)
+  if (!res.ok && !data?.link) {
+    throw new Error(data?.description ?? res.statusText)
   }
 
-  return data.result_url
+  return data
 }
 
 function displayError(message) {
@@ -44,7 +49,7 @@ async function handleSubmit(event) {
   event.preventDefault()
 
   const shortenBtn = event.target.querySelector('#shorten-btn')
-  const urlRegex = /[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)/
+  const urlRegex = /https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)/
   event.target.classList.remove('form-error')
 
   if (!input.value.match(urlRegex)) {
@@ -55,7 +60,7 @@ async function handleSubmit(event) {
   try {
     shortenBtn.disabled = true
     const data = await getShortenedURL(input.value)
-    appendItem(data.result)
+    appendItem(data)
     input.value = ''
   } catch (error) {
     displayError(error)
@@ -69,9 +74,9 @@ function appendItem(item) {
   listItem.className = 'rounded-sm bg-white flex flex-col xl:flex-row xl:items-center xl:py-4 xl:pl-8 xl:pr-6 xl:justify-between'
 
   listItem.innerHTML = `
-    <p class="px-4 py-[0.375rem] border-b-[1px] border-b-line xl:p-0 xl:border-none xl:mr-4 whitespace-nowrap overflow-hidden overflow-ellipsis" title="${item.original_link}">${item.original_link}</p>
+    <p class="px-4 py-[0.375rem] border-b-[1px] border-b-line xl:p-0 xl:border-none xl:mr-4 whitespace-nowrap overflow-hidden overflow-ellipsis" title="${item.long_url}">${item.long_url}</p>
     <div class="px-4 pt-[0.375rem] pb-4 flex flex-col xl:p-0 xl:flex-row xl:items-center">
-      <p class="text-cyan" id="short-link">${item.short_link}</p>
+      <p class="text-cyan" id="short-link">${item.link}</p>
       <button class="bg-cyan text-white font-bold mt-2 rounded-sm py-2 leading-md xl:mt-0 xl:ml-6 hover:bg-cyan-hover transition-colors xl:text-sm xl:min-w-[103px]" id="btn-add">Copy</button>
     </div>
   `
