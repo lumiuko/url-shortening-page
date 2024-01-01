@@ -22,14 +22,17 @@ function handleMenuBtnClick() {
 }
 
 async function getShortenedURL(url) {
-  const res = await fetch(`https://api.shrtco.de/v2/shorten?url=${url}`)
+  const res = await fetch('https://cleanuri.com/api/v1/shorten', {
+    method: 'post',
+    body: JSON.stringify({ url })
+  })
   const data = await res.json()
 
-  if (!data.ok) {
+  if (!res.ok && data?.error) {
     throw new Error(data.error)
   }
 
-  return data
+  return data.result_url
 }
 
 function displayError(message) {
